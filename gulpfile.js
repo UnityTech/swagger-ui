@@ -99,6 +99,8 @@ gulp.task('less', ['clean'], function() {
     .on('error', log)
     .pipe(gulp.dest('./src/main/html/css/'))
     .pipe(connect.reload());
+
+
 });
 
 
@@ -111,6 +113,22 @@ gulp.task('copy', ['less'], function() {
   gulp
     .src(['./lib/**/*.{js,map}'])
     .pipe(gulp.dest('./dist/lib'))
+    .on('error', log);
+
+  // copy bower components
+  gulp
+    .src(['./bower_components/**/dist/*.{js,map}'])
+    .pipe(gulp.dest('./dist/lib'))
+    .on('error', log);
+
+  gulp
+    .src(['./bower_components/angular/*.{js,map}'])
+    .pipe(gulp.dest('./dist/lib'))
+    .on('error', log);
+
+  gulp
+    .src(['./bower_components/**/dist/*.css'])
+    .pipe(gulp.dest('./dist/css'))
     .on('error', log);
 
   // copy `lang` for translations

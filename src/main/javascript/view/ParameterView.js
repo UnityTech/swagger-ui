@@ -57,7 +57,16 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
       $('.model-signature', $(this.el)).append(signatureView.render().el);
     }
     else {
-      $('.model-signature', $(this.el)).html(this.model.signature);
+      var signature = this.model.signature;
+      if (signature === 'undefined') {
+        if (this.model.schema && this.model.schema.properties) {
+          //signature = SwaggerClient.SchemaMarkup.schemaToHTML(this.model.schema);
+          signature = $('<span class="formatted-json"></span>');
+          signature.JSONView(this.model.schema, {collapsed: true});
+    
+        }
+      }
+      $('.model-signature', $(this.el)).html(signature);
     }
 
     var isParam = false;

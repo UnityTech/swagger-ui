@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var bower = require('gulp-bower');
 var es = require('event-stream');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
@@ -35,6 +36,14 @@ gulp.task('clean', function() {
 });
 
 /**
+ * Install bower components
+ */
+gulp.task('bower', function() {
+  return bower()
+    .pipe(gulp.dest('./bower_components'))
+});
+
+/**
  * Processes Handlebars templates
  */
 function templates() {
@@ -61,7 +70,7 @@ gulp.task('lint', function () {
 /**
  * Build a distribution
  */
-gulp.task('dist', ['clean','lint'], function() {
+gulp.task('dist', ['clean','bower', 'lint'], function() {
 
   return es.merge(
       gulp.src([
@@ -118,11 +127,6 @@ gulp.task('copy', ['less'], function() {
   // copy bower components
   gulp
     .src(['./bower_components/**/dist/*.{js,map}'])
-    .pipe(gulp.dest('./dist/lib'))
-    .on('error', log);
-
-  gulp
-    .src(['./bower_components/angular/*.{js,map}'])
     .pipe(gulp.dest('./dist/lib'))
     .on('error', log);
 

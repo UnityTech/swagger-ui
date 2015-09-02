@@ -13,3 +13,4 @@ node_modules/*
 /nbproject/private/
 bower_components
 dist
+npm-debug.log

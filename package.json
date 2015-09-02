@@ -56,6 +56,6 @@
     "gulp-bower": "0.0.10"
   },
   "scripts": {
-        "postinstall": "gulp"
+    "postinstall": "node_modules/.bin/gulp"
   }
 }

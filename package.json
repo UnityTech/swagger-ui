@@ -54,8 +54,5 @@
   },
   "dependencies": {
     "gulp-bower": "0.0.10"
-  },
-  "scripts": {
-    "postinstall": "node_modules/.bin/gulp"
   }
 }
